@@ -30,10 +30,16 @@ int Plot() {
   if ( f->IsOpen() ) printf("File opened successfully\n");
     
   // Creating canvases
-  TCanvas *c_1 = new TCanvas("c_1", "Plots", 200, 200, 800, 700);
-  TCanvas *c_2 = new TCanvas("c_2", "genPlots", 200, 200, 800, 700);
-  c_1->Divide(2,2);
-  c_2->Divide(2,2);
+  //TCanvas *c_1 = new TCanvas("c_1", "Plots", 200, 200, 800, 700);
+  //TCanvas *c_2 = new TCanvas("c_2", "genPlots1", 200, 200, 800, 700);
+  //TCanvas *c_3 = new TCanvas("c_3", "genPlots2", 200, 200, 800, 700);
+  //TCanvas *c_4 = new TCanvas("c_4", "genPlots3", 200, 200, 800, 700);
+  TCanvas *c_5 = new TCanvas("c_5", "genPlots4", 200, 200, 800, 700);
+  //c_1->Divide(2,2);
+  //c_2->Divide(2,2);
+  //c_3->Divide(2,2);
+  //c_4->Divide(2,2);
+  c_5->Divide(2,2);
 
   // Getting histogramsing into memory
   TH1F *ht = (TH1F*)f->Get("ht");
@@ -48,6 +54,17 @@ int Plot() {
   TH1F *genGamma_pt = (TH1F*)f->Get("genGamma_pt");
   TH1F *genTau_pt = (TH1F*)f->Get("genTau_pt");
   TH1F *genStat23_pt = (TH1F*)f->Get("genStat23_pt");
+  TH1F *genPart_pt = (TH1F*)f->Get("genPart_pt");
+  TH1F *genPart_eta = (TH1F*)f->Get("genPart_eta");
+  TH1F *genPart_mass = (TH1F*)f->Get("genPart_mass");
+  TH1F *genPart_pdgId = (TH1F*)f->Get("genPart_pdgId");
+  TH1F *genPart_status = (TH1F*)f->Get("genPart_status");
+  TH1F *genPart_charge = (TH1F*)f->Get("genPart_charge");
+  TH1F *genPart_motherId = (TH1F*)f->Get("genPart_motherId");
+  TH1F *Higgs_mass = (TH1F*)f->Get("Higgs_mass");
+  TH1F *Higgs_pt = (TH1F*)f->Get("Higgs_pt");
+  TH1F *W_mass = (TH1F*)f->Get("W_mass");
+  TH1F *W_pt = (TH1F*)f->Get("W_pt");
 
   // Normalizing
   Double_t ht_norm = 1.0/(ht->Integral());
@@ -62,7 +79,18 @@ int Plot() {
   Double_t genGamma_pt_norm = 1.0/(genGamma_pt->Integral());
   Double_t genTau_pt_norm = 1.0/(genTau_pt->Integral());
   Double_t genStat23_pt_norm = 1.0/(genStat23_pt->Integral());
-  
+  Double_t genPart_pt_norm = 1.0/(genPart_pt->Integral());
+  Double_t genPart_eta_norm = 1.0/(genPart_eta->Integral());
+  Double_t genPart_mass_norm = 1.0/(genPart_mass->Integral());
+  Double_t genPart_pdgId_norm = 1.0/(genPart_pdgId->Integral());
+  Double_t genPart_status_norm = 1.0/(genPart_status->Integral());
+  Double_t genPart_charge_norm = 1.0/(genPart_charge->Integral());
+  Double_t genPart_motherId_norm = 1.0/(genPart_motherId->Integral());
+  Double_t Higgs_mass_norm = 1.0/(Higgs_mass->Integral());
+  Double_t Higgs_pt_norm = 1.0/(Higgs_pt->Integral());
+  Double_t W_mass_norm = 1.0/(W_mass->Integral());
+  Double_t W_pt_norm = 1.0/(W_pt->Integral());
+
   ht->Scale(ht_norm);
   met_pt->Scale(met_pt_norm);
   mt2->Scale(mt2_norm);
@@ -75,7 +103,18 @@ int Plot() {
   genGamma_pt->Scale(genGamma_pt_norm);
   genTau_pt->Scale(genTau_pt_norm);
   //genStat23_pt->Scale(genStat23_pt_norm);
-    
+  genPart_pt->Scale(genPart_pt_norm);
+  genPart_eta->Scale(genPart_eta_norm);
+  genPart_mass->Scale(genPart_mass_norm);
+  genPart_pdgId->Scale(genPart_pdgId_norm);
+  genPart_status->Scale(genPart_status_norm);
+  genPart_charge->Scale(genPart_charge_norm);
+  genPart_motherId->Scale(genPart_motherId_norm);
+  Higgs_mass->Scale(Higgs_mass_norm);
+  Higgs_pt->Scale(Higgs_pt_norm);
+  W_mass->Scale(W_mass_norm);
+  W_pt->Scale(W_pt_norm);
+
   // Changing appearance
   ht->SetLineColor(kBlue-7);
   met_pt->SetLineColor(kBlue-7);
@@ -108,7 +147,7 @@ int Plot() {
   legend4->AddEntry(nJet30_cut,"After Selection","f");
     
   // Drawing Histograms
-  c_1->cd(1); // Go to panel 1
+  /*c_1->cd(1); // Go to panel 1
   ht_cut->Draw("hist");
   gPad->Update();
   TPaveStats *ps = (TPaveStats*)ht_cut->FindObject("stats");
@@ -154,16 +193,40 @@ int Plot() {
   gPad->Update();
   ps = (TPaveStats*)nJet30->FindObject("stats");
   ps->SetY1NDC(0.45); ps->SetY2NDC(0.60);
-  legend4->Draw("same");
+  legend4->Draw("same");*/
      
-  c_2->cd(1);
+  /*c_2->cd(1);
   genLep_pt->Draw("hist");
   c_2->cd(2);
   genGamma_pt->Draw("hist");
   c_2->cd(3);
   genTau_pt->Draw("hist");
   c_2->cd(4);
-  genStat23_pt->Draw("hists");
+  genStat23_pt->Draw("hists");*/
+
+  /*c_3->cd(1);
+  genPart_pt->Draw("hist");
+  c_3->cd(2);
+  genPart_eta->Draw("hist");
+  c_3->cd(3);
+  genPart_mass->Draw("hist");
+  c_3->cd(4);
+  genPart_pdgId->Draw("hist");
+  c_4->cd(1);
+  genPart_status->Draw("hist");
+  c_4->cd(2);
+  genPart_charge->Draw("hist");
+  c_4->cd(3);
+  genPart_motherId->Draw("hist");*/
+
+  c_5->cd(1);
+  Higgs_mass->Draw("hist");
+  c_5->cd(2);
+  Higgs_pt->Draw("hist");
+  c_5->cd(3);
+  W_mass->Draw("hist");
+  c_5->cd(4);
+  W_pt->Draw("hist");
 
   return 0;
 }
