@@ -34,12 +34,14 @@ int Plot() {
   //TCanvas *c_2 = new TCanvas("c_2", "genPlots1", 200, 200, 800, 700);
   //TCanvas *c_3 = new TCanvas("c_3", "genPlots2", 200, 200, 800, 700);
   //TCanvas *c_4 = new TCanvas("c_4", "genPlots3", 200, 200, 800, 700);
-  TCanvas *c_5 = new TCanvas("c_5", "genPlots4", 200, 200, 800, 700);
+  //TCanvas *c_5 = new TCanvas("c_5", "genPlots4", 200, 200, 800, 700);
+  TCanvas *c_6 = new TCanvas("c_6", "genPlots4", 200, 200, 800, 350);
   //c_1->Divide(2,2);
   //c_2->Divide(2,2);
   //c_3->Divide(2,2);
   //c_4->Divide(2,2);
-  c_5->Divide(2,2);
+  //c_5->Divide(2,2);
+  c_6->Divide(2,1);
 
   // Getting histogramsing into memory
   TH1F *ht = (TH1F*)f->Get("ht");
@@ -65,6 +67,8 @@ int Plot() {
   TH1F *Higgs_pt = (TH1F*)f->Get("Higgs_pt");
   TH1F *W_mass = (TH1F*)f->Get("W_mass");
   TH1F *W_pt = (TH1F*)f->Get("W_pt");
+  TH1F *H_decays = (TH1F*)f->Get("H_decays");
+  TH1F *W_decays = (TH1F*)f->Get("W_decays");
 
   // Normalizing
   Double_t ht_norm = 1.0/(ht->Integral());
@@ -90,7 +94,7 @@ int Plot() {
   Double_t Higgs_pt_norm = 1.0/(Higgs_pt->Integral());
   Double_t W_mass_norm = 1.0/(W_mass->Integral());
   Double_t W_pt_norm = 1.0/(W_pt->Integral());
-
+ 
   ht->Scale(ht_norm);
   met_pt->Scale(met_pt_norm);
   mt2->Scale(mt2_norm);
@@ -219,14 +223,19 @@ int Plot() {
   c_4->cd(3);
   genPart_motherId->Draw("hist");*/
 
-  c_5->cd(1);
+  /*c_5->cd(1);
   Higgs_mass->Draw("hist");
   c_5->cd(2);
   Higgs_pt->Draw("hist");
   c_5->cd(3);
   W_mass->Draw("hist");
   c_5->cd(4);
-  W_pt->Draw("hist");
+  W_pt->Draw("hist");*/
+
+  c_6->cd(1);
+  H_decays->Draw("hist");
+  c_6->cd(2);
+  W_decays->Draw("hist");
 
   return 0;
 }

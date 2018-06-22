@@ -62,6 +62,8 @@ void mt2tree::Loop()
    TH1F *Higgs_pt = new TH1F("Higgs_pt", "Higgs_pt", 100, 0, 2500);
    TH1F *W_mass = new TH1F("W_mass", "W_mass", 100, 0, 1000);
    TH1F *W_pt = new TH1F("W_pt", "W_pt", 100, 0, 3000);
+   TH1F *H_decays = new TH1F("H_decays", "H_decays", 100, 0, 30);
+   TH1F *W_decays = new TH1F("W_decays", "W_decays", 100, 0, 30);
 
    Long64_t nentries = fChain->GetEntriesFast();
 
@@ -119,8 +121,9 @@ void mt2tree::Loop()
 	if(!std::isnan(genPart_pt[i]) && genPart_pdgId[i]==25) Higgs_pt->Fill(genPart_pt[i]);
 	if(!std::isnan(genPart_mass[i]) && genPart_pdgId[i]==24) W_mass->Fill(genPart_mass[i]);
 	if(!std::isnan(genPart_pt[i]) && genPart_pdgId[i]==24) W_pt->Fill(genPart_pt[i]);
-      }
-     
+	if(!std::isnan(genPart_pdgId[i]) && genPart_motherId[i]==25) H_decays->Fill(genPart_pdgId[i]);
+	if(!std::isnan(genPart_pdgId[i]) && genPart_motherId[i]==24) W_decays->Fill(genPart_pdgId[i]);
+      }     
 
    }
    
@@ -152,6 +155,8 @@ void mt2tree::Loop()
    Higgs_pt->Write("Higgs_pt");
    W_mass->Write("W_mass");
    W_pt->Write("W_pt");
+   H_decays->Write("H_decays");
+   W_decays->Write("W_decays");
    
    f->Write();
    f->Close();
