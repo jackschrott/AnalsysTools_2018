@@ -122,7 +122,7 @@ void mt2tree::Loop()
 	if(!std::isnan(genPart_mass[i]) && genPart_pdgId[i]==24) W_mass->Fill(genPart_mass[i]);
 	if(!std::isnan(genPart_pt[i]) && genPart_pdgId[i]==24) W_pt->Fill(genPart_pt[i]);
 	if(!std::isnan(genPart_pdgId[i]) && genPart_motherId[i]==25) H_decays->Fill(genPart_pdgId[i]);
-	if(!std::isnan(genPart_pdgId[i]) && genPart_motherId[i]==abs(24)) W_decays->Fill(genPart_pdgId[i]);
+	if(!std::isnan(genPart_pdgId[i]) && abs(genPart_motherId[i])==24) W_decays->Fill(genPart_pdgId[i]);
       }     
 
    }
