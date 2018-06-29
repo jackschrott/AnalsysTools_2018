@@ -35,13 +35,15 @@ int Plot() {
   //TCanvas *c_3 = new TCanvas("c_3", "genPlots2", 200, 200, 800, 700);
   //TCanvas *c_4 = new TCanvas("c_4", "genPlots3", 200, 200, 800, 700);
   //TCanvas *c_5 = new TCanvas("c_5", "genPlots4", 200, 200, 800, 700);
-  TCanvas *c_6 = new TCanvas("c_6", "genPlots4", 200, 200, 800, 350);
+  //TCanvas *c_6 = new TCanvas("c_6", "genPlots4", 200, 200, 800, 350);
+  TCanvas *c_7 = new TCanvas("c_7", "xsec_weight", 200, 200, 800, 350);
   //c_1->Divide(2,2);
   //c_2->Divide(2,2);
   //c_3->Divide(2,2);
   //c_4->Divide(2,2);
   //c_5->Divide(2,2);
-  c_6->Divide(2,1);
+  //c_6->Divide(2,1);
+  c_7->Divide(2,1);
 
   // Getting histogramsing into memory
   TH1F *ht = (TH1F*)f->Get("ht");
@@ -69,6 +71,10 @@ int Plot() {
   TH1F *W_pt = (TH1F*)f->Get("W_pt");
   TH1F *H_decays = (TH1F*)f->Get("H_decays");
   TH1F *W_decays = (TH1F*)f->Get("W_decays");
+  TH1F *xsec = (TH1F*)f->Get("xsec");
+  TH1F *weight = (TH1F*)f->Get("weight");
+
+  //f->Close();
 
   // Normalizing
   Double_t ht_norm = 1.0/(ht->Integral());
@@ -232,10 +238,15 @@ int Plot() {
   c_5->cd(4);
   W_pt->Draw("hist");*/
 
-  c_6->cd(1);
+  /*c_6->cd(1);
   H_decays->Draw("hist");
   c_6->cd(2);
-  W_decays->Draw("hist");
+  W_decays->Draw("hist");*/
+
+  c_7->cd(1);
+  xsec->Draw("hist");
+  c_7->cd(2);
+  weight->Draw("hist");
 
   return 0;
 }
