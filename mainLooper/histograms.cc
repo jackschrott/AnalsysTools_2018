@@ -76,10 +76,10 @@ void histograms::Plot() {
   TLegend *legend2 = new TLegend(0.68, 0.75, 0.98, 0.95);
   TLegend *legend4 = new TLegend(0.68, 0.75, 0.98, 0.95);
   TLegend *legend3 = new TLegend(0.68, 0.75, 0.98, 0.95);
-  legend1->SetHeader("Legend","C"); // option "C" allows to center the header                                                                                                                                   
-  legend2->SetHeader("Legend","C"); // option "C" allows to center the header                                                                                                                                   
-  legend3->SetHeader("Legend","C"); // option "C" allows to center the header                                                                                                                                   
-  legend4->SetHeader("Legend","C"); // option "C" allows to center the header                                                                                                                                   
+  legend1->SetHeader("Legend","C"); // option "C" allows to center the header
+  legend2->SetHeader("Legend","C"); // option "C" allows to center the header
+  legend3->SetHeader("Legend","C"); // option "C" allows to center the header
+  legend4->SetHeader("Legend","C"); // option "C" allows to center the header
   legend1->AddEntry(ht,"WH", "f");
   legend1->AddEntry(ht_tt, "t#bar{t}", "f");
   legend1->AddEntry(ht_wjets, "Wjets", "f");
@@ -193,7 +193,7 @@ void histograms::makeTable(const char* fileName, const char* authorName) {
   codef << "Rare SM events & $"<< value <<"\\pm"<< value <<"$ & $"<< value <<"\\pm"
         << value <<"$ & $"<< value <<"\\pm"<< value <<"$ \\\\" << endl;
   codef << "\\toprule" << endl;
-  codef << "Process  & $nJet30="<<bounds[12]<<"\,$Gev & $nJet30="<<bounds[14]<<"\,$Gev & $nJet30="<<bounds[15]<<"\\,$Gev \\\\" << endl;
+  codef << "Process  & $nJet30="<<bounds[12]<<"\\,$Gev & $nJet30="<<bounds[14]<<"\\,$Gev & $nJet30="<<bounds[15]<<"\\,$Gev \\\\" << endl;
   codef << "\\midrule" << endl;
   codef << "$WH$ & $"<< nJet30_n1 <<"\\pm"<< nJet30_n1_err <<"$ & $"<< nJet30_n2 <<"\\pm"
         << nJet30_n2_err <<"$ &  $"<< nJet30_n3 <<"\\pm"<< nJet30_n3_err << "$ \\\\" << endl;
