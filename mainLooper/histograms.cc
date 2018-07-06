@@ -193,8 +193,7 @@ void histograms::makeTable(const char* fileName, const char* authorName) {
   codef << "Rare SM events & $"<< value <<"\\pm"<< value <<"$ & $"<< value <<"\\pm"
         << value <<"$ & $"<< value <<"\\pm"<< value <<"$ \\\\" << endl;
   codef << "\\toprule" << endl;
-  codef << "Process  & $"<<bounds[12]<<"\\leq nJet30\\leq "<<bounds[13]<<"\\,$Gev & $"<<bounds[13]<<"< nJet30\\leq "
-	<<bounds[14]<<"\\,$Gev & $nJet30> "<<bounds[14]<<"\\,$Gev \\\\" << endl;
+  codef << "Process  & $nJet30="<<bounds[12]<<"\,$Gev & $nJet30="<<bounds[14]<<"\,$Gev & $nJet30="<<bounds[15]<<"\\,$Gev \\\\" << endl;
   codef << "\\midrule" << endl;
   codef << "$WH$ & $"<< nJet30_n1 <<"\\pm"<< nJet30_n1_err <<"$ & $"<< nJet30_n2 <<"\\pm"
         << nJet30_n2_err <<"$ &  $"<< nJet30_n3 <<"\\pm"<< nJet30_n3_err << "$ \\\\" << endl;
