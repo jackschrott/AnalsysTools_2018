@@ -13,24 +13,22 @@ class histograms {
   virtual void Plot();
   virtual void makeTable(const char* fileName, const char* authorName);
 
-  // Declaring histograms                                                                                                                                                                    
+  // Declaring histograms                                                                                                                                                       
+  Double_t luminosity;
+
   TH1F *ht;
-  TH1F *ht_raw;
   TH1F *ht_tt;
   TH1F *ht_wjets;
   TH1F *ht_zinv;
   TH1F *met_pt;
-  TH1F *met_pt_raw;
   TH1F *met_pt_tt;
   TH1F *met_pt_wjets;
   TH1F *met_pt_zinv;
   TH1F *mt2;
-  TH1F *mt2_raw;
   TH1F *mt2_tt;
   TH1F *mt2_wjets;
   TH1F *mt2_zinv;
   TH1F *nJet30;
-  TH1F *nJet30_raw;
   TH1F *nJet30_tt;
   TH1F *nJet30_wjets;
   TH1F *nJet30_zinv;
@@ -109,10 +107,12 @@ class histograms {
   Double_t nJet30_zinv_n3, nJet30_zinv_n3_err;
 
   // Constructor
-  histograms() {
+  histograms(Double_t luminosity) {
 
-    // Loading root file                                                                                                                                                                                    
-    TFile *f = new TFile("histograms.root");
+    this->luminosity = luminosity;
+
+    // Loading root file                                                                                                                                                          
+    TFile *f = new TFile("signal.root");
     TFile *f2 = new TFile("tt_background.root");
     TFile *f3 = new TFile("wjets_background.root");
     TFile *f4 = new TFile("zinv_background.root");
@@ -120,27 +120,40 @@ class histograms {
 
     // Getting histogramsing into memory                                                                                                                                                  
     ht = (TH1F*)f->Get("ht");
-    ht_raw = (TH1F*)f->Get("ht_raw");
     ht_tt = (TH1F*)f2->Get("ht");
     ht_wjets = (TH1F*)f3->Get("ht");
     ht_zinv = (TH1F*)f4->Get("ht");
     met_pt = (TH1F*)f->Get("met_pt");
-    met_pt_raw = (TH1F*)f->Get("met_pt_raw");
     met_pt_tt = (TH1F*)f2->Get("met_pt");
     met_pt_wjets = (TH1F*)f3->Get("met_pt");
     met_pt_zinv = (TH1F*)f4->Get("met_pt");
     mt2 = (TH1F*)f->Get("mt2");
-    mt2_raw = (TH1F*)f->Get("mt2_raw");
     mt2_tt = (TH1F*)f2->Get("mt2");
     mt2_wjets = (TH1F*)f3->Get("mt2");
     mt2_zinv = (TH1F*)f4->Get("mt2");
     nJet30 = (TH1F*)f->Get("nJet30");
-    nJet30_raw = (TH1F*)f->Get("nJet30_raw");
     nJet30_tt = (TH1F*)f2->Get("nJet30");
     nJet30_wjets = (TH1F*)f3->Get("nJet30");
     nJet30_zinv = (TH1F*)f4->Get("nJet30");
 
-    bounds = {250,500,750,2000,250,375,500,2000,200,300,400,1000,2,2,3,4};
+    ht->Scale(luminosity);
+    ht_tt->Scale(luminosity);
+    ht_wjets->Scale(luminosity);
+    ht_zinv->Scale(luminosity);
+    met_pt->Scale(luminosity);
+    met_pt_tt->Scale(luminosity);
+    met_pt_wjets->Scale(luminosity);
+    met_pt_zinv->Scale(luminosity);
+    mt2->Scale(luminosity);
+    mt2_tt->Scale(luminosity);
+    mt2_wjets->Scale(luminosity);
+    mt2_zinv->Scale(luminosity);
+    nJet30->Scale(luminosity);
+    nJet30_tt->Scale(luminosity);
+    nJet30_wjets->Scale(luminosity);
+    nJet30_zinv->Scale(luminosity);
+
+    bounds = {250,520,1000,2000,250,450,750,2000,200,350,600,1000,2,2,3,4};
 
     ht_x = ht->GetXaxis();
     met_pt_x = met_pt->GetXaxis();
@@ -169,9 +182,11 @@ class histograms {
     ht_n3 = ht->IntegralAndError(ht_c+1, ht_d, ht_n3_err);
     ht_tt_n1 = ht_tt->IntegralAndError(ht_a, ht_b, ht_tt_n1_err);
     ht_tt_n2 = ht_tt->IntegralAndError(ht_b+1, ht_c, ht_tt_n2_err);
+    cout << ht_tt_n2 << endl;
     ht_tt_n3 = ht_tt->IntegralAndError(ht_c+1, ht_d, ht_tt_n3_err);
     ht_wjets_n1 = ht_wjets->IntegralAndError(ht_a, ht_b, ht_wjets_n1_err);
     ht_wjets_n2 = ht_wjets->IntegralAndError(ht_b+1, ht_c, ht_wjets_n2_err);
+    cout << ht_wjets_n2 << endl;
     ht_wjets_n3 = ht_wjets->IntegralAndError(ht_c+1, ht_d, ht_wjets_n3_err);
     ht_zinv_n1 = ht_zinv->IntegralAndError(ht_a, ht_b, ht_zinv_n1_err);
     ht_zinv_n2 = ht_zinv->IntegralAndError(ht_b+1, ht_c, ht_zinv_n2_err);

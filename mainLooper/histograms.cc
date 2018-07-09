@@ -1,6 +1,6 @@
-/* C++                                                                                                                                                                                                          
- * Author: Jack Schrott (fnal)                                                                                                                                                                                  
- * Date: 06/20/2018                                                                                                                                                                                             
+/* C++                                                                                                                                                                           
+ * Author: Jack Schrott (fnal)                                                                                                                                                    
+ * Date: 06/20/2018                                                                                                                                                             
  ****************************                                                                                                                                                                                   
  */
 
@@ -30,45 +30,64 @@ void histograms::Plot() {
   TCanvas *c_1 = new TCanvas("c_1", "Plots", 200, 200, 900, 700);
   c_1->Divide(2,2);
 
-  THStack *ht_stack = new THStack("ht","");
-  THStack *met_pt_stack = new THStack("met_pt","");
-  THStack *mt2_stack = new THStack("mt2","");
-  THStack *nJet30_stack = new THStack("nJet30","");
+  THStack *ht_stack = new THStack("ht", "");//"H_{T}^{miss} backgrounds");
+  THStack *met_pt_stack = new THStack("met_pt", "");//"Met_{pt} backgrounds");
+  THStack *mt2_stack = new THStack("mt2","");//"M_{T2} backgrounds");
+  THStack *nJet30_stack = new THStack("nJet30","");;//"nJet30 backgrounds");
+
+  TLine *ht_bound1 = new TLine(bounds[0], 0, bounds[0], 460); ht_bound1->SetLineColor(kRed);
+  TLine *ht_bound2 = new TLine(bounds[1], 0, bounds[1], 460); ht_bound2->SetLineColor(kRed);
+  TLine *ht_bound3 = new TLine(bounds[2], 0, bounds[2], 460); ht_bound3->SetLineColor(kRed);
+  TLine *met_pt_bound1 = new TLine(bounds[4], 0, bounds[4], 870); met_pt_bound1->SetLineColor(kRed);
+  TLine *met_pt_bound2 = new TLine(bounds[5], 0, bounds[5], 870); met_pt_bound2->SetLineColor(kRed);
+  TLine *met_pt_bound3 = new TLine(bounds[6], 0, bounds[6], 870); met_pt_bound3->SetLineColor(kRed);
+  TLine *mt2_bound1 = new TLine(bounds[8], 0, bounds[8], 540); mt2_bound1->SetLineColor(kRed);
+  TLine *mt2_bound2 = new TLine(bounds[9], 0, bounds[9], 540); mt2_bound2->SetLineColor(kRed);
+  TLine *mt2_bound3 = new TLine(bounds[10], 0, bounds[10], 540); mt2_bound3->SetLineColor(kRed);
+  TLine *nJet30_bound1 = new TLine(bounds[12], 0, bounds[12], 1700); nJet30_bound1->SetLineColor(kRed);
+  TLine *nJet30_bound2 = new TLine(bounds[14], 0, bounds[14], 1700); nJet30_bound2->SetLineColor(kRed);
+  TLine *nJet30_bound3 = new TLine(bounds[15], 0, bounds[15], 1700); nJet30_bound3->SetLineColor(kRed);
+  TLine *nJet30_bound4 = new TLine(bounds[15]+1, 0, bounds[15]+1, 1700); nJet30_bound4->SetLineColor(kRed);
+
+  ht->Scale(200);
+  met_pt->Scale(200);
+  mt2->Scale(200);
+  nJet30->Scale(200);
 
   // Setting colors
   ht->SetFillColor(kOrange);
-  ht_tt->SetFillColor(kBlue);
-  ht_wjets->SetFillColor(kGreen);
-  ht_zinv->SetFillColor(kRed);
+  ht_tt->SetFillColor(kBlue+2);
+  ht_wjets->SetFillColor(kGreen+2);
+  ht_zinv->SetFillColor(kMagenta+2);
   met_pt->SetFillColor(kOrange);
-  met_pt_tt->SetFillColor(kBlue);
-  met_pt_wjets->SetFillColor(kGreen);
-  met_pt_zinv->SetFillColor(kRed);
+  met_pt_tt->SetFillColor(kBlue+2);
+  met_pt_wjets->SetFillColor(kGreen+2);
+  met_pt_zinv->SetFillColor(kMagenta+2);
   mt2->SetFillColor(kOrange);
-  mt2_tt->SetFillColor(kBlue);
-  mt2_wjets->SetFillColor(kGreen);
-  mt2_zinv->SetFillColor(kRed);
+  mt2_tt->SetFillColor(kBlue+2);
+  mt2_wjets->SetFillColor(kGreen+2);
+  mt2_zinv->SetFillColor(kMagenta+2);
   nJet30->SetFillColor(kOrange);
-  nJet30_tt->SetFillColor(kBlue);
-  nJet30_wjets->SetFillColor(kGreen);
-  nJet30_zinv->SetFillColor(kRed);
+  nJet30_tt->SetFillColor(kBlue+2);
+  nJet30_wjets->SetFillColor(kGreen+2);
+  nJet30_zinv->SetFillColor(kMagenta+2);
 
   // Adding to TH1Stacks
-  ht_stack->Add(ht_tt);
-  ht_stack->Add(ht_wjets);
   ht_stack->Add(ht_zinv);
+  ht_stack->Add(ht_wjets);
+  ht_stack->Add(ht_tt);
   ht_stack->Add(ht);
-  met_pt_stack->Add(met_pt_tt);
-  met_pt_stack->Add(met_pt_wjets);
   met_pt_stack->Add(met_pt_zinv);
+  met_pt_stack->Add(met_pt_wjets);
+  met_pt_stack->Add(met_pt_tt);
   met_pt_stack->Add(met_pt);
-  mt2_stack->Add(mt2_tt);
-  mt2_stack->Add(mt2_wjets);
   mt2_stack->Add(mt2_zinv);
+  mt2_stack->Add(mt2_wjets);
+  mt2_stack->Add(mt2_tt);
   mt2_stack->Add(mt2);
-  nJet30_stack->Add(nJet30_tt);
-  nJet30_stack->Add(nJet30_wjets);
   nJet30_stack->Add(nJet30_zinv);
+  nJet30_stack->Add(nJet30_wjets);
+  nJet30_stack->Add(nJet30_tt);
   nJet30_stack->Add(nJet30);
 
   // Adding legends
@@ -80,49 +99,66 @@ void histograms::Plot() {
   legend2->SetHeader("Legend","C"); // option "C" allows to center the header
   legend3->SetHeader("Legend","C"); // option "C" allows to center the header
   legend4->SetHeader("Legend","C"); // option "C" allows to center the header
-  legend1->AddEntry(ht,"WH", "f");
+  legend1->AddEntry(ht,"(WH) x 200", "f");
   legend1->AddEntry(ht_tt, "t#bar{t}", "f");
   legend1->AddEntry(ht_wjets, "Wjets", "f");
   legend1->AddEntry(ht_zinv, "Zinv", "f");
-  legend2->AddEntry(met_pt,"WH", "f");
+  legend2->AddEntry(met_pt,"(WH) x 200", "f");
   legend2->AddEntry(met_pt_tt, "t#bar{t}", "f");
   legend2->AddEntry(met_pt_wjets, "Wjets", "f");
   legend2->AddEntry(met_pt_zinv, "Zinv", "f");
-  legend3->AddEntry(mt2,"WH", "f");
+  legend3->AddEntry(mt2,"(WH) x 200", "f");
   legend3->AddEntry(mt2_tt, "t#bar{t}", "f");
   legend3->AddEntry(mt2_wjets, "Wjets", "f");
   legend3->AddEntry(mt2_zinv, "Zinv", "f");
-  legend4->AddEntry(nJet30,"WH", "f");
+  legend4->AddEntry(nJet30,"(WH) x 200", "f");
   legend4->AddEntry(nJet30_tt, "t#bar{t}", "f");
   legend4->AddEntry(nJet30_wjets, "Wjets", "f");
   legend4->AddEntry(nJet30_zinv, "Zinv", "f");
 
   // Drawing to Canvas                                                                                                                                                                                         
   gStyle->SetOptStat(0);
+  gPad->SetTicks();
   c_1->cd(1);
   ht_stack->Draw("hist");
+  ht_bound1->Draw("sames");
+  ht_bound2->Draw("sames");
+  ht_bound3->Draw("sames");
   legend1->Draw("sames");
-  ht_stack->GetXaxis()->SetTitle("H_{t}^{miss} [GeV]");
+  ht_stack->GetXaxis()->SetTitle("H_{T}^{miss} [GeV]");
   c_1->cd(1)->Modified();
   c_1->cd(2);
   met_pt_stack->Draw("hist");
+  met_pt_bound1->Draw("sames");
+  met_pt_bound2->Draw("sames");
+  met_pt_bound3->Draw("sames");
   legend2->Draw("sames");
   met_pt_stack->GetXaxis()->SetTitle("Met_{pt} [GeV]");
   c_1->cd(2)->Modified();
   c_1->cd(3);
   mt2_stack->Draw("hist");
+  mt2_bound1->Draw("sames");
+  mt2_bound2->Draw("sames");
+  mt2_bound3->Draw("sames");
   legend3->Draw("sames");
-  mt2_stack->GetXaxis()->SetTitle("Mt2 [GeV]");
+  mt2_stack->GetXaxis()->SetTitle("M_{T2} [GeV]");
   c_1->cd(3)->Modified();
   c_1->cd(4);
   nJet30_stack->Draw("hist");
+  nJet30_bound1->Draw("sames");
+  nJet30_bound2->Draw("sames");
+  nJet30_bound3->Draw("sames");
+  nJet30_bound4->Draw("sames");
   legend4->Draw("sames");
   nJet30_stack->GetXaxis()->SetTitle("nJet30 [N]");
   c_1->cd(4)->Modified();
 }
 
 void histograms::makeTable(const char* fileName, const char* authorName) {
-
+  
+  cout << ht_tt_n2 << endl;
+  cout << ht_wjets_n2 << endl;
+  cout << ht_zinv_n2 << endl;
   ofstream codef;
   time_t now = time(0);
   char* dt = ctime(&now);
@@ -143,7 +179,7 @@ void histograms::makeTable(const char* fileName, const char* authorName) {
   codef << "\\geometry{letterpaper}  % ... or a4paper or a5paper or ..." << endl;
   codef << "" << endl;
   codef << "\\begin{document}" << endl;
-  codef << "\\title{Expected Event Count Summary}" << endl;
+  codef << "\\title{Expected Event Count Summary: luminosity="<<luminosity<<"fb}" << endl;
   codef << "\\author{Created by: "<< authorName <<"}" << endl;
   codef << "\\date{"<< dt <<"}" << endl;
   codef << "\\maketitle" << endl;
